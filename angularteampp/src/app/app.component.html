@@ -13,13 +13,29 @@
       #addMemberInput
        type="text" placeholder="Name"
        (input)="onInput(addMemberInput.value)"
-
+       [value]="newMemberName"
       />
       <button (click)="addMember()">Add</button>
     </div>
     <div class="input-container">
-      <input type="text" placeholder="# of teams"/>
-      <button>Generate</button>
+      <input
+      #numberOfTeamsInput
+       type="number"
+       placeholder="# of teams"
+       (input)="onNumberOfTeamsInput(numberOfTeamsInput.value)"
+       [value]="numberOfTeams"
+       />
+      <button (click)="generateTeam()"> Generate</button>
     </div>
+    <p *ngIf="errorMessage" class="error-msg">
+      {{ errorMessage }}
+    </p>
+  </div>
+  <div *ngIf="teams.length"  class="team-container">
+<app-team
+ *ngFor="let team of teams; let i = index"
+  [team] ="team" 
+  [index] = "i"></app-team>
   </div>
 </div>
+<router-outlet></router-outlet>
